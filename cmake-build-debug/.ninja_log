@@ -1,0 +1,5 @@
+# ninja log v5
+2	76	1717574962709743369	build.ninja	e9096957e7e21f89
+1	299	1717499054805540277	CMakeFiles/Assignment_2_Programming_Paradigms.dir/Assignment_2/main.cpp.o	62eac54789324bdf
+300	329	1717499054837170561	Assignment_2_Programming_Paradigms	6adaf8a53bbc7899
+7	175	1717576386902589058	CMakeFiles/Assignment_2_Programming_Paradigms.dir/Assignment_2/main.cpp.o	62eac54789324bdf
