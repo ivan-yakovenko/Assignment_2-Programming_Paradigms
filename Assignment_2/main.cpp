@@ -78,6 +78,14 @@ int main() {
                 delete[] text;
                 break;
             }
+            case '8': {
+                cout << "Choose line, index and number of symbols: ";
+                int line, index, symbols;
+                cin >> line >> index >> symbols;
+                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                dynamicArray.Delete(line, index, symbols);
+                break;
+            }
             default: {
                 cout << "Wrong command" << endl;
                 break;
