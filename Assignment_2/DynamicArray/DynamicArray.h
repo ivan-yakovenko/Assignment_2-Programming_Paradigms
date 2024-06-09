@@ -24,5 +24,6 @@ public:
     void Cut(int line, int index, int symbols);
     void Paste(int line, int index);
     void Copy(int line, int index, int symbols);
+    void InsertReplacement(int line, int index, char *newValue);
     void Print() const;
 };
