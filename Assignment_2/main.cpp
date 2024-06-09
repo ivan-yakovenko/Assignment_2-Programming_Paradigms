@@ -7,12 +7,17 @@ int main() {
     DynamicArray dynamicArray;
     while(true) {
         cout << "Choose the command: " << endl;
-        char command;
-        cin >> command;
-        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+        int command;
+        if (!(cin >> command)) {
+            cout << "Please enter a valid integer command." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        }
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (command) {
-            case '1' : {
+            case 1 : {
                 cout << "Enter text to append: " << endl;
                 char *text = new char[256];
                 cin.getline(text, 256);
@@ -20,12 +25,12 @@ int main() {
                 delete[] text;
                 break;
             }
-            case '2': {
+            case 2: {
                 dynamicArray.AddNewline();
                 cout << "New line is started" << endl;
                 break;
             }
-            case '3': {
+            case 3: {
                 char filename[256];
                 while(true) {
                     cout << "Enter the file name for saving: " << endl;
@@ -39,7 +44,7 @@ int main() {
                 cout << "Text has been saved successfully" << endl;
                 break;
             }
-            case '4': {
+            case 4: {
                 char filename[256];
                 while(true) {
                     cout << "Enter the file name for loading: " << endl;
@@ -53,12 +58,12 @@ int main() {
                 cout << "Text has been loaded successfully" << endl;
                 break;
             }
-            case '5': {
+            case 5: {
                 dynamicArray.Print();
                 cout << endl;
                 break;
             }
-            case '6': {
+            case 6: {
                 cout << "Choose line and index: ";
                 int line, index;
                 cin >> line >> index;
@@ -70,7 +75,7 @@ int main() {
                 delete[] text;
                 break;
             }
-            case '7': {
+            case 7: {
                 cout << "Enter text to search: ";
                 char *text = new char[256];
                 cin.getline(text, 256);
@@ -78,12 +83,28 @@ int main() {
                 delete[] text;
                 break;
             }
-            case '8': {
+            case 8: {
                 cout << "Choose line, index and number of symbols: ";
                 int line, index, symbols;
                 cin >> line >> index >> symbols;
                 cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
                 dynamicArray.Delete(line, index, symbols);
+                break;
+            }
+            case 11: {
+                cout << "Choose line, index and number of symbols: ";
+                int line, index, symbols;
+                cin >> line >> index >> symbols;
+                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                dynamicArray.Cut(line, index, symbols);
+                break;
+            }
+            case 12 : {
+                cout << "Choose line and index: ";
+                int line, index;
+                cin >> line >> index;
+                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                dynamicArray.Paste(line, index);
                 break;
             }
             default: {
