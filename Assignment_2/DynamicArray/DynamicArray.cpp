@@ -95,6 +95,23 @@ void DynamicArray::Insert(int line, int index, char *newValue) {
     this->cols += strlen(newValue);
 }
 
+void DynamicArray::Search(char *text) {
+    size_t textLength = strlen(text);
+    int found;
+    for (size_t i = 0; i <= this->rows; i++) {
+        size_t rowLength = strlen(this->data[i]);
+        for (size_t j = 0; j < rowLength; j++) {
+            if (strncmp(&this->data[i][j], text, textLength) == 0) {
+                printf("%zu, %zu\n", i, j);
+                found = 1;
+            }
+        }
+    }
+    if (found == 0) {
+        printf("Text not found");
+    }
+}
+
 void DynamicArray::Print() const {
     for (size_t i = 0; i <= this->rows; i++) {
         size_t j = 0;
