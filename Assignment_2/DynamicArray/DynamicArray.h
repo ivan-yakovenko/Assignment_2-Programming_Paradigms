@@ -23,5 +23,6 @@ public:
     void Delete(int line, int index, int symbols);
     void Cut(int line, int index, int symbols);
     void Paste(int line, int index);
+    void Copy(int line, int index, int symbols);
     void Print() const;
 };
