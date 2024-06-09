@@ -144,6 +144,27 @@ void DynamicArray::LoadInfo(char *filename) {
     }
 }
 
+void DynamicArray::Delete(int line, int index, int symbols) {
+    if(line > this->rows) {
+        cout << "Out of range, try another line" << endl;
+        return;
+    }
+
+    int length = strlen(this->data[line]);
+    if(index > length) {
+        cout << "Out of range, try another index" << endl;
+        return;
+    }
+    if(index + symbols > length) {
+        cout << "Too many symbols to delete" << endl;
+        return;
+    }
+
+    memmove(&this->data[line][index], &this->data[line][index + symbols], length - index - symbols + 1);
+    this->cols -= symbols;
+
+}
+
 void DynamicArray::Print() const {
     for (size_t i = 0; i <= this->rows; i++) {
         size_t j = 0;
