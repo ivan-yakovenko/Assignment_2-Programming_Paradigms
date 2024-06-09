@@ -183,7 +183,9 @@ void DynamicArray::Cut(int line, int index, int symbols) {
         return;
     }
 
-    delete[] buffer;
+    if (buffer != nullptr) {
+        delete[] buffer;
+    }
     buffer = new char[symbols+1];
     strncpy(buffer, &this->data[line][index], symbols);
     buffer[symbols] = '\0';
@@ -199,6 +201,30 @@ void DynamicArray::Paste(int line, int index) {
         return;
     }
     Insert(line, index, buffer);
+}
+
+void DynamicArray::Copy(int line, int index, int symbols) {
+    if(line > this->rows) {
+        cout << "Out of range, try another line" << endl;
+        return;
+    }
+
+    int length = strlen(this->data[line]);
+    if(index > length) {
+        cout << "Out of range, try another index" << endl;
+        return;
+    }
+    if(index + symbols > length) {
+        cout << "Too many symbols to delete" << endl;
+        return;
+    }
+
+    if (buffer != nullptr) {
+        delete[] buffer;
+    }
+    buffer = new char[symbols+1];
+    strncpy(buffer, &this->data[line][index], symbols);
+    buffer[symbols] = '\0';
 }
 
 void DynamicArray::Print() const {
