@@ -9,13 +9,15 @@ DynamicArray::DynamicArray() {
     cols = 0;
     capacity = 0;
     data = nullptr;
+    buffer = nullptr;
 }
 
-DynamicArray::DynamicArray(char **data, size_t rows, size_t cols, size_t capacity) {
+DynamicArray::DynamicArray(char **data, size_t rows, size_t cols, size_t capacity, char *buffer) {
     this->rows = rows;
     this->cols = cols;
     this->capacity = capacity;
     this->data = data;
+    this->buffer = buffer;
 }
 
 DynamicArray::~DynamicArray() {
@@ -163,6 +165,40 @@ void DynamicArray::Delete(int line, int index, int symbols) {
     memmove(&this->data[line][index], &this->data[line][index + symbols], length - index - symbols + 1);
     this->cols -= symbols;
 
+}
+
+void DynamicArray::Cut(int line, int index, int symbols) {
+    if(line > this->rows) {
+        cout << "Out of range, try another line" << endl;
+        return;
+    }
+
+    int length = strlen(this->data[line]);
+    if(index > length) {
+        cout << "Out of range, try another index" << endl;
+        return;
+    }
+    if(index + symbols > length) {
+        cout << "Too many symbols to delete" << endl;
+        return;
+    }
+
+    delete[] buffer;
+    buffer = new char[symbols+1];
+    strncpy(buffer, &this->data[line][index], symbols);
+    buffer[symbols] = '\0';
+
+    memmove(&this->data[line][index], &this->data[line][index + symbols], length - index - symbols + 1);
+    this->cols -= symbols;
+
+}
+
+void DynamicArray::Paste(int line, int index) {
+    if(buffer == nullptr) {
+        cout << "Nothing to paste" << endl;
+        return;
+    }
+    Insert(line, index, buffer);
 }
 
 void DynamicArray::Print() const {
