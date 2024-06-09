@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "DynamicArray.h"
 
 using namespace std;
@@ -18,9 +19,10 @@ DynamicArray::DynamicArray(char **data, size_t rows, size_t cols, size_t capacit
 }
 
 DynamicArray::~DynamicArray() {
-    for(size_t i = 0; i < this->capacity; i++) {
+    for(size_t i = 0; i < this->rows; i++) {
         delete[] this->data[i];
     }
+    delete[] this->data;
 }
 
 size_t DynamicArray::getCapacity() const {
@@ -30,7 +32,7 @@ size_t DynamicArray::getCapacity() const {
 void DynamicArray::Resize(size_t newValueSize) {
     size_t oldCapacity = getCapacity();
     size_t newCapacity = oldCapacity + newValueSize;
-    char **newData = new char*[capacity];
+    char **newData = new char*[newCapacity];
 
     for(size_t i = 0; i < oldCapacity; i++) {
         newData[i] = this->data[i];
@@ -68,7 +70,7 @@ void DynamicArray::AddNewline() {
     newData[this->rows] = new char[this->capacity];
     newData[this->rows][0] = '\0';
 
-    delete[] data;
+    delete[] this->data;
     this->data = newData;
 }
 
@@ -109,6 +111,36 @@ void DynamicArray::Search(char *text) {
     }
     if (found == 0) {
         printf("Text not found");
+    }
+}
+
+void DynamicArray::SaveInfo(char *filename) {
+    ofstream fout(filename);
+    for(size_t i = 0; i <= this->rows; i++) {
+        size_t j = 0;
+        while (this->data[i][j] != '\0') {
+            fout << this->data[i][j];
+            j++;
+        }
+        fout << endl;
+    }
+    fout.close();
+}
+
+void DynamicArray::LoadInfo(char *filename) {
+
+    ifstream fin(filename);
+
+    char element;
+
+    while(fin.get(element)) {
+        if(element == '\n') {
+            AddNewline();
+        }
+        else {
+            char str[2] = {element, '\0'};
+            PushBack(str);
+        }
     }
 }
 
