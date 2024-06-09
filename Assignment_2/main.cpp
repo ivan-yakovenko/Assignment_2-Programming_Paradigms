@@ -9,7 +9,7 @@ int main() {
         cout << "Choose the command: " << endl;
         int command;
         if (!(cin >> command)) {
-            cout << "Please enter a valid integer command." << endl;
+            cout << "Enter valid command" << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
@@ -113,6 +113,18 @@ int main() {
                 cin >> line >> index >> symbols;
                 cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
                 dynamicArray.Copy(line, index, symbols);
+                break;
+            }
+            case 14: {
+                cout << "Choose line and index: ";
+                int line, index;
+                cin >> line >> index;
+                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                cout << "Write text: ";
+                char *text = new char[256];
+                cin.getline(text, 256);
+                dynamicArray.InsertReplacement(line, index, text);
+                delete[] text;
                 break;
             }
             default: {
