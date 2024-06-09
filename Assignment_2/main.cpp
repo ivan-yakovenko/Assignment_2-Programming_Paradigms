@@ -107,6 +107,14 @@ int main() {
                 dynamicArray.Paste(line, index);
                 break;
             }
+            case 13 : {
+                cout << "Choose line and index and number of symbols: ";
+                int line, index, symbols;
+                cin >> line >> index >> symbols;
+                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                dynamicArray.Copy(line, index, symbols);
+                break;
+            }
             default: {
                 cout << "Wrong command" << endl;
                 break;
