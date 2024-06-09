@@ -21,7 +21,7 @@ DynamicArray::DynamicArray(char **data, size_t rows, size_t cols, size_t capacit
 }
 
 DynamicArray::~DynamicArray() {
-    for(size_t i = 0; i < this->rows; i++) {
+    for (size_t i = 0; i < this->rows; i++) {
         delete[] this->data[i];
     }
     delete[] this->data;
@@ -34,13 +34,13 @@ size_t DynamicArray::getCapacity() const {
 void DynamicArray::Resize(size_t newValueSize) {
     size_t oldCapacity = getCapacity();
     size_t newCapacity = oldCapacity + newValueSize;
-    char **newData = new char*[newCapacity];
+    char **newData = new char *[newCapacity];
 
-    for(size_t i = 0; i < oldCapacity; i++) {
+    for (size_t i = 0; i < oldCapacity; i++) {
         newData[i] = this->data[i];
     }
 
-    for(size_t i = oldCapacity; i < newCapacity; i++) {
+    for (size_t i = oldCapacity; i < newCapacity; i++) {
         newData[i] = new char[newCapacity];
     }
 
@@ -62,10 +62,10 @@ void DynamicArray::PushBack(char *newValue) {
 }
 
 void DynamicArray::AddNewline() {
-    PushBack(const_cast<char*>("\0"));
+    PushBack(const_cast<char *>("\0"));
     this->rows++;
     this->cols = 0;
-    char **newData = new char*[this->rows+1];
+    char **newData = new char *[this->rows + 1];
     for (size_t i = 0; i < this->rows; ++i) {
         newData[i] = this->data[i];
     }
@@ -77,23 +77,22 @@ void DynamicArray::AddNewline() {
 }
 
 void DynamicArray::Insert(int line, int index, char *newValue) {
-    if(line > this->rows) {
+    if (line > this->rows) {
         cout << "Out of range, try another one" << endl;
         return;
     }
 
     int length = strlen(this->data[line]);
-    if(index > length) {
+    if (index > length) {
         Resize(index - length + strlen(newValue));
-        for(int i = 0; i < index; i++) {
+        for (int i = 0; i < index; i++) {
             this->data[line][i] = ' ';
         }
-    }
-    else {
+    } else {
         Resize(strlen(newValue));
         memmove(&this->data[line][index + strlen(newValue)], &this->data[line][index], length - index + 1);
     };
-    for(int k = 0; k < strlen(newValue); k++) {
+    for (int k = 0; k < strlen(newValue); k++) {
         this->data[line][index + k] = newValue[k];
     }
     this->cols += strlen(newValue);
@@ -118,7 +117,7 @@ void DynamicArray::Search(char *text) {
 
 void DynamicArray::SaveInfo(char *filename) {
     ofstream fout(filename);
-    for(size_t i = 0; i <= this->rows; i++) {
+    for (size_t i = 0; i <= this->rows; i++) {
         size_t j = 0;
         while (this->data[i][j] != '\0') {
             fout << this->data[i][j];
@@ -135,11 +134,10 @@ void DynamicArray::LoadInfo(char *filename) {
 
     char element;
 
-    while(fin.get(element)) {
-        if(element == '\n') {
+    while (fin.get(element)) {
+        if (element == '\n') {
             AddNewline();
-        }
-        else {
+        } else {
             char str[2] = {element, '\0'};
             PushBack(str);
         }
@@ -147,17 +145,17 @@ void DynamicArray::LoadInfo(char *filename) {
 }
 
 void DynamicArray::Delete(int line, int index, int symbols) {
-    if(line > this->rows) {
+    if (line > this->rows) {
         cout << "Out of range, try another line" << endl;
         return;
     }
 
     int length = strlen(this->data[line]);
-    if(index > length) {
+    if (index > length) {
         cout << "Out of range, try another index" << endl;
         return;
     }
-    if(index + symbols > length) {
+    if (index + symbols > length) {
         cout << "Too many symbols to delete" << endl;
         return;
     }
@@ -168,17 +166,17 @@ void DynamicArray::Delete(int line, int index, int symbols) {
 }
 
 void DynamicArray::Cut(int line, int index, int symbols) {
-    if(line > this->rows) {
+    if (line > this->rows) {
         cout << "Out of range, try another line" << endl;
         return;
     }
 
     int length = strlen(this->data[line]);
-    if(index > length) {
+    if (index > length) {
         cout << "Out of range, try another index" << endl;
         return;
     }
-    if(index + symbols > length) {
+    if (index + symbols > length) {
         cout << "Too many symbols to delete" << endl;
         return;
     }
@@ -186,7 +184,7 @@ void DynamicArray::Cut(int line, int index, int symbols) {
     if (buffer != nullptr) {
         delete[] buffer;
     }
-    buffer = new char[symbols+1];
+    buffer = new char[symbols + 1];
     strncpy(buffer, &this->data[line][index], symbols);
     buffer[symbols] = '\0';
 
@@ -196,7 +194,7 @@ void DynamicArray::Cut(int line, int index, int symbols) {
 }
 
 void DynamicArray::Paste(int line, int index) {
-    if(buffer == nullptr) {
+    if (buffer == nullptr) {
         cout << "Nothing to paste" << endl;
         return;
     }
@@ -204,17 +202,17 @@ void DynamicArray::Paste(int line, int index) {
 }
 
 void DynamicArray::Copy(int line, int index, int symbols) {
-    if(line > this->rows) {
+    if (line > this->rows) {
         cout << "Out of range, try another line" << endl;
         return;
     }
 
     int length = strlen(this->data[line]);
-    if(index > length) {
+    if (index > length) {
         cout << "Out of range, try another index" << endl;
         return;
     }
-    if(index + symbols > length) {
+    if (index + symbols > length) {
         cout << "Too many symbols to delete" << endl;
         return;
     }
@@ -222,9 +220,31 @@ void DynamicArray::Copy(int line, int index, int symbols) {
     if (buffer != nullptr) {
         delete[] buffer;
     }
-    buffer = new char[symbols+1];
+    buffer = new char[symbols + 1];
     strncpy(buffer, &this->data[line][index], symbols);
     buffer[symbols] = '\0';
+}
+
+void DynamicArray::InsertReplacement(int line, int index, char *newValue) {
+    if (line > this->rows) {
+        cout << "Out of range, try another one" << endl;
+        return;
+    }
+
+    int length = strlen(this->data[line]);
+
+    if (index > length) {
+        Resize(index - length + strlen(newValue));
+        for (int i = 0; i < index; i++) {
+            this->data[line][i] = ' ';
+        }
+    } else {
+        Resize(strlen(newValue));
+    };
+    for (int k = 0; k < strlen(newValue); k++) {
+        this->data[line][index+k] = newValue[k];
+    }
+    this->cols += strlen(newValue);
 }
 
 void DynamicArray::Print() const {
