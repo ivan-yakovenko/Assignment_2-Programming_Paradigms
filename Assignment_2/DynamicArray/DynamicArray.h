@@ -19,5 +19,6 @@ public:
     void Search(char* text);
     void SaveInfo(char* filename);
     void LoadInfo(char* filename);
+    void Delete(int line, int index, int symbols);
     void Print() const;
 };
