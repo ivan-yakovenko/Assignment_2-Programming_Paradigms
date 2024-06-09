@@ -14,7 +14,7 @@ public:
     DynamicArray(char** data, size_t rows, size_t cols, size_t capacity);
     ~DynamicArray();
     size_t getCapacity() const;
-    void Resize(char* newValue);
+    void Resize(size_t newValueSize);
     void PushBack(char* newValue);
     void AddNewline();
     void Insert(int line, int index, char *newValue);
