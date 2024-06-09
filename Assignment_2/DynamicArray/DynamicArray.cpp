@@ -72,6 +72,29 @@ void DynamicArray::AddNewline() {
     this->data = newData;
 }
 
+void DynamicArray::Insert(int line, int index, char *newValue) {
+    if(line > this->rows) {
+        cout << "Out of range, try another one" << endl;
+        return;
+    }
+
+    int length = strlen(this->data[line]);
+    if(index > length) {
+        Resize(index - length + strlen(newValue));
+        for(int i = 0; i < index; i++) {
+            this->data[line][i] = ' ';
+        }
+    }
+    else {
+        Resize(strlen(newValue));
+        memmove(&this->data[line][index + strlen(newValue)], &this->data[line][index], length - index + 1);
+    };
+    for(int k = 0; k < strlen(newValue); k++) {
+        this->data[line][index + k] = newValue[k];
+    }
+    this->cols += strlen(newValue);
+}
+
 void DynamicArray::Print() const {
     for (size_t i = 0; i <= this->rows; i++) {
         size_t j = 0;
