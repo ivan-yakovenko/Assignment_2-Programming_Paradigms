@@ -67,7 +67,7 @@ int main() {
                 cout << "Choose line and index: ";
                 int line, index;
                 cin >> line >> index;
-                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cout << "Enter text to insert: ";
                 char *text = new char[256];
                 cin.getline(text, 256);
@@ -87,7 +87,7 @@ int main() {
                 cout << "Choose line, index and number of symbols: ";
                 int line, index, symbols;
                 cin >> line >> index >> symbols;
-                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 dynamicArray.Delete(line, index, symbols);
                 break;
             }
@@ -95,7 +95,7 @@ int main() {
                 cout << "Choose line, index and number of symbols: ";
                 int line, index, symbols;
                 cin >> line >> index >> symbols;
-                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 dynamicArray.Cut(line, index, symbols);
                 break;
             }
@@ -103,7 +103,7 @@ int main() {
                 cout << "Choose line and index: ";
                 int line, index;
                 cin >> line >> index;
-                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 dynamicArray.Paste(line, index);
                 break;
             }
@@ -111,7 +111,7 @@ int main() {
                 cout << "Choose line and index and number of symbols: ";
                 int line, index, symbols;
                 cin >> line >> index >> symbols;
-                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 dynamicArray.Copy(line, index, symbols);
                 break;
             }
@@ -119,7 +119,7 @@ int main() {
                 cout << "Choose line and index: ";
                 int line, index;
                 cin >> line >> index;
-                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cout << "Write text: ";
                 char *text = new char[256];
                 cin.getline(text, 256);
